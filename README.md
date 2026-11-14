@@ -8,4 +8,4 @@ Bed teleporter. Resets you, then flies to the selected bed.
 ## Usage
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/edgev67/BedTP-EDGEV4/main/bedtp.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/edgev69/bedtp-edgev4/main/bedtp.lua"))()
