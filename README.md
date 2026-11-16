@@ -2,8 +2,7 @@
 
 Bed teleporter. Resets you, then flies to the selected bed.
 
-- Noclip and Avoid are mutually exclusive
-- Clicking a bed resets you first, then flies once you respawn
+- Update 1.0.3: fixed script (used wrong version 💀)
 
 ## Usage
 
