@@ -25,6 +25,7 @@ end
 -- Empty list + PUBLIC = false means nobody can use it.
 local WHITELIST = {
     10562730435
+    12001206500
 }
 
 -- true = ignore the list, everyone allowed. false = list only.
