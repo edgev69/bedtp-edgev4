@@ -19,6 +19,91 @@ if env.BedUI and env.BedUI.Destroy then
 end
 
 ----------------------------------------------------------------
+-- whitelist
+----------------------------------------------------------------
+-- Roblox UserIds, one per line, comma after each.
+-- Empty list + PUBLIC = false means nobody can use it.
+local WHITELIST = {
+    10562730435
+}
+
+-- true = ignore the list, everyone allowed. false = list only.
+local PUBLIC = false
+
+local function denied()
+    local target = nil
+    if gethui then
+        pcall(function()
+            target = gethui()
+        end)
+    end
+    if not target then
+        target = player:FindFirstChildOfClass("PlayerGui")
+    end
+    if not target then
+        target = game:GetService("CoreGui")
+    end
+
+    local sg = Instance.new("ScreenGui")
+    sg.Name = "BedTPDenied"
+    sg.ResetOnSpawn = false
+    sg.IgnoreGuiInset = true
+    sg.Parent = target
+
+    local f = Instance.new("Frame")
+    f.Size = UDim2.fromOffset(248, 80)
+    f.Position = UDim2.new(0, 36, 0, 70)
+    f.BackgroundColor3 = Color3.fromRGB(26, 20, 40)
+    f.BorderSizePixel = 0
+    f.Parent = sg
+
+    local c = Instance.new("UICorner")
+    c.CornerRadius = UDim.new(0, 8)
+    c.Parent = f
+
+    local s = Instance.new("UIStroke")
+    s.Color = Color3.fromRGB(220, 45, 90)
+    s.Transparency = 0.3
+    s.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+    s.Parent = f
+
+    local t = Instance.new("TextLabel")
+    t.Size = UDim2.new(1, -16, 1, -16)
+    t.Position = UDim2.fromOffset(8, 8)
+    t.BackgroundTransparency = 1
+    t.Font = Enum.Font.GothamMedium
+    t.TextSize = 11
+    t.TextColor3 = Color3.fromRGB(236, 234, 246)
+    t.TextWrapped = true
+    t.TextXAlignment = Enum.TextXAlignment.Left
+    t.Text = "Not whitelisted.\nYour UserId: " .. tostring(player.UserId) .. "\nSend it to edgemaster to get added."
+    t.Parent = f
+
+    task.delay(15, function()
+        if sg and sg.Parent then
+            sg:Destroy()
+        end
+    end)
+end
+
+local function whitelisted(id)
+    if PUBLIC then
+        return true
+    end
+    for _, allowed in ipairs(WHITELIST) do
+        if allowed == id then
+            return true
+        end
+    end
+    return false
+end
+
+if not whitelisted(player.UserId) then
+    denied()
+    return
+end
+
+----------------------------------------------------------------
 -- theme
 ----------------------------------------------------------------
 local T = {
