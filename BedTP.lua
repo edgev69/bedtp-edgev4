@@ -24,7 +24,7 @@ end
 -- Roblox UserIds, one per line, comma after each.
 -- Empty list + PUBLIC = false means nobody can use it.
 local WHITELIST = {
-    10562730435
+    10562730435,
     12001206500
 }
 
